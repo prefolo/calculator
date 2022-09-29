@@ -62,7 +62,7 @@ function pressOperatorOrEqual(e) {
 	switch (operator) {
 		case '=':
 			operate(activeOperator, operandA, currentDisplayValue);
-			toggleOperator('', 1);
+			toggleOperator('');
 			break;
 		default:
 			if (activeOperator !== '') {
@@ -82,16 +82,16 @@ function clear() {
 
 	currentDisplayValue = 0;
 	operandA = 0;
-	toggleOperator('', 1);
+	toggleOperator('');
 	isStartingToDisplayOperandB = 0;
 }
 
-function toggleOperator(operator, disable) {
+function toggleOperator(operator) {
 	document
 		.querySelectorAll('.operator')
 		.forEach((el) => el.classList.remove('active'));
 
-	if (disable) {
+	if (operator == '') {
 		activeOperator = '';
 	} else {
 		activeOperator = operator;

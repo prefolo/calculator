@@ -62,7 +62,7 @@ function pressOperatorOrEqual(e) {
 	switch (operator) {
 		case '=':
 			operate(activeOperator, operandA, currentDisplayValue);
-			activeOperator = '';
+			toggleOperator('', 1);
 			break;
 		default:
 			if (activeOperator !== '') {
@@ -70,7 +70,7 @@ function pressOperatorOrEqual(e) {
 			}
 
 			operandA = currentDisplayValue;
-			activeOperator = operator;
+			toggleOperator(operator);
 			isStartingToDisplayOperandB = 1;
 			break;
 	}
@@ -82,8 +82,37 @@ function clear() {
 
 	currentDisplayValue = 0;
 	operandA = 0;
-	activeOperator = '';
+	toggleOperator('', 1);
 	isStartingToDisplayOperandB = 0;
+}
+
+function toggleOperator(operator, disable) {
+	document
+		.querySelectorAll('.operator')
+		.forEach((el) => el.classList.remove('active'));
+
+	if (disable) {
+		activeOperator = '';
+	} else {
+		activeOperator = operator;
+
+		switch (operator) {
+			case '+':
+				document.querySelector('#add').classList.add('active');
+				break;
+			case '-':
+				document.querySelector('#subtract').classList.add('active');
+				break;
+			case 'x':
+				document.querySelector('#multiply').classList.add('active');
+				break;
+			case '/':
+				document.querySelector('#divide').classList.add('active');
+				break;
+			default:
+				break;
+		}
+	}
 }
 
 let currentDisplayValue = 0;

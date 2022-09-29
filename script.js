@@ -76,6 +76,16 @@ function pressOperatorOrEqual(e) {
 	}
 }
 
+function clear() {
+	const display = document.querySelector('#display');
+	display.textContent = '';
+
+	currentDisplayValue = 0;
+	operandA = 0;
+	activeOperator = '';
+	isStartingToDisplayOperandB = 0;
+}
+
 let currentDisplayValue = 0;
 let operandA = 0;
 let activeOperator = '';
@@ -92,3 +102,5 @@ document
 document
 	.querySelector('#equal')
 	.addEventListener('click', pressOperatorOrEqual);
+
+document.querySelector('#clear').addEventListener('click', clear);

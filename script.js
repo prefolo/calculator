@@ -15,18 +15,18 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
-	switch (operatoir) {
+	switch (operator) {
 		case '+':
-			add(a, b);
+			populateDisplayWithResult(add(a, b));
 			break;
 		case '-':
-			subtract(a, b);
+			populateDisplayWithResult(subtract(a, b));
 			break;
 		case 'x':
-			multiply(a, b);
+			populateDisplayWithResult(multiply(a, b));
 			break;
 		case '/':
-			divide(a, b);
+			populateDisplayWithResult(divide(a, b));
 			break;
 		default:
 			break;
@@ -35,13 +35,60 @@ function operate(operator, a, b) {
 
 function populateDisplay(e) {
 	const display = document.querySelector('#display');
-	display.textContent += e.target.textContent;
 
-	currentDisplayValue = display.textContent;
+	if (isStartingToDisplayOperandB) {
+		display.textContent = e.target.textContent;
+		currentDisplayValue = Number(display.textContent);
+		isStartingToDisplayOperandB = 0;
+		return;
+	}
+
+	if (display.textContent.length == 17) return;
+
+	display.textContent += e.target.textContent;
+	currentDisplayValue = Number(display.textContent);
+}
+
+function populateDisplayWithResult(result) {
+	const display = document.querySelector('#display');
+
+	display.textContent = result;
+	currentDisplayValue = result;
+}
+
+function pressOperatorOrEqual(e) {
+	const operator = e.target.textContent;
+
+	switch (operator) {
+		case '=':
+			operate(activeOperator, operandA, currentDisplayValue);
+			activeOperator = '';
+			break;
+		default:
+			if (activeOperator !== '') {
+				operate(activeOperator, operandA, currentDisplayValue);
+			}
+
+			operandA = currentDisplayValue;
+			activeOperator = operator;
+			isStartingToDisplayOperandB = 1;
+			break;
+	}
 }
 
 let currentDisplayValue = 0;
+let operandA = 0;
+let activeOperator = '';
+let isStartingToDisplayOperandB = 0;
 
 document
 	.querySelectorAll('.number')
 	.forEach((el) => el.addEventListener('click', populateDisplay));
+
+document
+	.querySelectorAll('.operator')
+	.forEach((el) => el.addEventListener('click', pressOperatorOrEqual));
+
+document
+	.querySelector('#equal')
+	.addEventListener('click', pressOperatorOrEqual);

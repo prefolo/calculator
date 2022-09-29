@@ -15,3 +15,52 @@ body{
 .bx{
     padding:50px;
 }
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#calc-container{
+    border: 1px solid #f7f7f7;
+    display: flex;
+    flex-direction: column;
+}
+
+.row{
+    display: flex;
+}
+
+.row > * {
+    border:1px solid #eee;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    cursor: pointer;
+}
+
+.void{
+    cursor: default;
+}
+
+.operand{
+    background-color: rgb(89, 89, 89);
+    color: #fff;
+}
+
+.operator{
+    background-color: orange;
+}
+
+#equal{
+    background-color: rgb(126, 190, 138);
+    color: #fff;
+}
+
+#display {
+    height: 60px;
+    background-color: rgb(164, 255, 238);
+}

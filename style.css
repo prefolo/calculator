@@ -56,7 +56,8 @@ body{
 }
 
 .operator.active{
-    background-color: red;
+    background-color: rgb(93, 142, 255);
+    color: #fff;        
 }
 
 #equal{

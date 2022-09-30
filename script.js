@@ -45,6 +45,10 @@ function populateDisplay(e) {
 
 	if (display.textContent.length == 17) return;
 
+	if (display.textContent == 'Is not a number') {
+		clear();
+	}
+
 	display.textContent += e.target.textContent;
 	currentDisplayValue = Number(display.textContent);
 
@@ -55,6 +59,12 @@ function populateDisplay(e) {
 
 function populateDisplayWithResult(result) {
 	const display = document.querySelector('#display');
+
+	if (isNaN(result) || result == 'Infinity') {
+		display.textContent = 'Is not a number';
+		currentDisplayValue = 'Is not a number';
+		return;
+	}
 
 	display.textContent = result;
 	currentDisplayValue = result;

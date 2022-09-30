@@ -46,6 +46,11 @@ function populateDisplay(e) {
 		return;
 	}
 
+	if (wasPressedEqual) {
+		display.textContent = '';
+		wasPressedEqual = 0;
+	}
+
 	if (display.textContent.length == 17) return;
 
 	if (display.textContent == 'Is not a number') {
@@ -54,6 +59,7 @@ function populateDisplay(e) {
 
 	display.textContent += e.target.textContent;
 
+	// Manage decimal numbers
 	if (display.textContent.includes('.0')) {
 		currentDisplayValue = display.textContent;
 		return;
@@ -86,6 +92,7 @@ function pressOperatorOrEqual(e) {
 		case '=':
 			operate(activeOperator, operandA, currentDisplayValue);
 			toggleOperator('');
+			wasPressedEqual = 1;
 			break;
 		default:
 			if (activeOperator !== '') {
@@ -152,6 +159,7 @@ let currentDisplayValue = 0;
 let operandA = 0;
 let activeOperator = '';
 let isStartingToDisplayOperandB = 0;
+let wasPressedEqual = 0;
 
 document
 	.querySelectorAll('.number')

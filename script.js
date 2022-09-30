@@ -91,7 +91,7 @@ function pressOperatorOrEqual(e) {
 	switch (operator) {
 		case '=':
 			operate(activeOperator, operandA, currentDisplayValue);
-			toggleOperator('');
+			toggleOperatorHighlight('');
 			wasPressedEqual = 1;
 			break;
 		default:
@@ -100,7 +100,7 @@ function pressOperatorOrEqual(e) {
 			}
 
 			operandA = currentDisplayValue;
-			toggleOperator(operator);
+			toggleOperatorHighlight(operator);
 			isStartingToDisplayOperandB = 1;
 			break;
 	}
@@ -112,11 +112,11 @@ function clear() {
 
 	currentDisplayValue = 0;
 	operandA = 0;
-	toggleOperator('');
+	toggleOperatorHighlight('');
 	isStartingToDisplayOperandB = 0;
 }
 
-function toggleOperator(operator) {
+function toggleOperatorHighlight(operator) {
 	document
 		.querySelectorAll('.operator')
 		.forEach((el) => el.classList.remove('active'));
@@ -145,7 +145,7 @@ function toggleOperator(operator) {
 	}
 }
 
-function addPoint() {
+function addDecimalPoint() {
 	const display = document.querySelector('#display');
 
 	if (display.textContent.includes('.')) {
@@ -192,7 +192,7 @@ document
 
 document.querySelector('#clear').addEventListener('click', clear);
 
-document.querySelector('#point').addEventListener('click', addPoint);
+document.querySelector('#point').addEventListener('click', addDecimalPoint);
 
 document.querySelector('#delete').addEventListener('click', deleteLastCifra);
 

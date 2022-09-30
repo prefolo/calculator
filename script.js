@@ -15,6 +15,9 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
+	a = Number(a);
+	b = Number(b);
+
 	switch (operator) {
 		case '+':
 			populateDisplayWithResult(add(a, b));
@@ -50,6 +53,12 @@ function populateDisplay(e) {
 	}
 
 	display.textContent += e.target.textContent;
+
+	if (display.textContent.includes('.0')) {
+		currentDisplayValue = display.textContent;
+		return;
+	}
+
 	currentDisplayValue = Number(display.textContent);
 
 	// Prevent the display of wrong values with leading zeros
@@ -129,6 +138,16 @@ function toggleOperator(operator) {
 	}
 }
 
+function addPoint() {
+	const display = document.querySelector('#display');
+
+	if (display.textContent.includes('.')) {
+		return;
+	}
+
+	display.textContent += '.';
+}
+
 let currentDisplayValue = 0;
 let operandA = 0;
 let activeOperator = '';
@@ -147,6 +166,8 @@ document
 	.addEventListener('click', pressOperatorOrEqual);
 
 document.querySelector('#clear').addEventListener('click', clear);
+
+document.querySelector('#point').addEventListener('click', addPoint);
 
 // prevent text selection on button press
 document.querySelectorAll('.row').forEach((el) =>

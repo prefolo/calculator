@@ -63,6 +63,7 @@ body{
 #equal{
     background-color: rgb(126, 190, 138);
     color: #fff;
+    border-bottom-right-radius: 10px;
 }
 
 #display {
@@ -72,4 +73,16 @@ body{
     align-items: center;
     justify-content: end;
     padding: 0 20px;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.calc-container:last-child{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#zero{
+    border-bottom-left-radius: 10px;
 }

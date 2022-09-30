@@ -47,6 +47,10 @@ function populateDisplay(e) {
 
 	display.textContent += e.target.textContent;
 	currentDisplayValue = Number(display.textContent);
+
+	// Prevent the display of wrong values with leading zeros
+	// i.e. 0000 or 000089. Display instead 0 or 89.
+	display.textContent = currentDisplayValue;
 }
 
 function populateDisplayWithResult(result) {
@@ -78,7 +82,7 @@ function pressOperatorOrEqual(e) {
 
 function clear() {
 	const display = document.querySelector('#display');
-	display.textContent = '';
+	display.textContent = '0';
 
 	currentDisplayValue = 0;
 	operandA = 0;
@@ -133,3 +137,10 @@ document
 	.addEventListener('click', pressOperatorOrEqual);
 
 document.querySelector('#clear').addEventListener('click', clear);
+
+// prevent text selection on button press
+document.querySelectorAll('.row').forEach((el) =>
+	el.addEventListener('mousedown', (e) => {
+		if (e.detail > 1) e.preventDefault();
+	})
+);

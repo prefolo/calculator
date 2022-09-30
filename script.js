@@ -155,6 +155,23 @@ function addPoint() {
 	display.textContent += '.';
 }
 
+function deleteLastCifra() {
+	const display = document.querySelector('#display');
+	let text = display.textContent;
+
+	if (text.length == 1) {
+		text = 0;
+		display.textContent = 0;
+		currentDisplayValue = 0;
+		return;
+	}
+
+	let newText = text.toString().slice(0, -1);
+
+	display.textContent = newText;
+	currentDisplayValue = newText;
+}
+
 let currentDisplayValue = 0;
 let operandA = 0;
 let activeOperator = '';
@@ -176,6 +193,8 @@ document
 document.querySelector('#clear').addEventListener('click', clear);
 
 document.querySelector('#point').addEventListener('click', addPoint);
+
+document.querySelector('#delete').addEventListener('click', deleteLastCifra);
 
 // prevent text selection on button press
 document.querySelectorAll('.row').forEach((el) =>
